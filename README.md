@@ -1,1 +1,1 @@
-# APS-and-T-Mamba-in-OSV
+# Online Signature Verication Using Augmented Path Signature and T-Mamba
