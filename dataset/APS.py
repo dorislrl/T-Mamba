@@ -56,18 +56,12 @@ class AddTime(BaseEstimator, TransformerMixin):
         data: numpy.ndarray or torch.Tensor of shape [L, C]
         returns: numpy.ndarray of shape [L, C+1]
         """
-        # 转成 torch.Tensor
         if isinstance(data, np.ndarray):
             data = torch.from_numpy(data).float()
 
         L, C = data.shape
-
-        # 时间通道 [0, 1]，长度为 L
         time_scaled = torch.linspace(0, 1, L, device=data.device).view(L, 1)
-
-        # 拼接在第一列
         out = torch.cat((time_scaled, data), dim=1)
-
         return out.cpu().numpy()
 class AppendZero(BaseEstimator, TransformerMixin):
     """Append a zero starting vector to every path.
@@ -80,11 +74,9 @@ class AppendZero(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        # 如果是 numpy，转成 torch
         if isinstance(X, np.ndarray):
             X = torch.from_numpy(X).float()
 
-        # 如果是 (L,C)，扩展 batch 维度
         added_batch = False
         if X.dim() == 2:  # (L,C)
             X = X.unsqueeze(0)  # -> (1,L,C)
@@ -93,8 +85,6 @@ class AppendZero(BaseEstimator, TransformerMixin):
         B, L, C = X.shape
         zero_vec = torch.zeros(size=(B, 1, C), device=X.device, dtype=X.dtype)
         X_out = torch.cat((zero_vec, X), dim=1)
-
-        # 如果原来是 (L,C)，去掉 batch 维度
         if added_batch:
             X_out = X_out.squeeze(0)  # -> (L+1,C)
 
@@ -131,13 +121,7 @@ class ShiftToZero:
 def sigfeatExt(pathList, feats, dim=2, 
                transform=False, finger_scene=False,
                window_size=10, stride=1, signature_depth=2,
-               use_leadlag=False, use_logsig=False, 
-                 use_dyadic=False, dyadic_depth=5):
-    """
-    输入：
-        pathList: list[np.ndarray] or list[torch.Tensor] (L,C)
-        feats: list 收集特征
-    """
+               use_leadlag=False, use_logsig=False):
     for path in pathList:
         if isinstance(path, torch.Tensor):
             path = path.cpu().numpy()
