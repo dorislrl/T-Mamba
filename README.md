@@ -5,7 +5,7 @@ This repository contains the official implementation for online signature verifi
 
 **T-Mamba Architecture**: To optimize sequence modeling, we introduce T-Mamba, which replaces traditional RNNs/Transformers with a hybrid architecture for superior long-range dependency modeling with linear-time complexity $O(L)$.
 
-**High Performance**: Optimized for both stylus-based and finger-based online signature datasets including MCYT-100, SVC-2004 Task2, DeepSign DB this three datasets.
+**High Performance**: Optimized for both stylus-based and finger-based online signature datasets including MCYT-100, SVC-2004 Task2, DeepSign DB these three datasets.
 
 ## Installation & Environment
 The environment setup consists of two main parts: the feature extraction library and the Mamba sequence modeling framework.
