@@ -7,6 +7,31 @@ T-Mamba Architecture: To optimize sequence modeling, we introduce T-Mamba, which
 
 High Performance: Optimized for both stylus-based and finger-based online signature datasets including MCYT-100, SVC-2004 Task2, DeepSign DB this three datasets.
 
+## Installation & Environment
+The environment setup consists of two main parts: the feature extraction library and the Mamba sequence modeling framework.
+
+1. Requirements
+Python 3.10+
+
+PyTorch 2.1.0+
+
+CUDA 11.8+ (Required for Mamba kernels)
+
+2. APS Dependency
+For Augmented Path Signatures, we utilize the iisignature library to compute iterated integrals:
+
+```Bash
+pip install iisignature
+```
+3. T-Mamba Environment (SSM)
+The core of T-Mamba relies on the selective state space model implementation. We strictly follow the official installation guidelines from [https://github.com/mamba-org/mamba].
+
+To install the necessary kernels, run:
+```Bash
+pip install causal-conv1d>=1.4.0
+pip install mamba-ssm
+```
+
 ## Quick Start
 ```bash
 # 1. Training 
