@@ -3,7 +3,7 @@ import numpy
 import pickle 
 from matplotlib import pyplot as plt
 import sys
-from dataset.utils import *
+from dataset.APS import *
 
 class dataset(object):
     """docstring for dataset"""
